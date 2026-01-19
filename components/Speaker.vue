@@ -68,10 +68,5 @@ defineProps<{
 
 .social a {
   color: var(--color-link);
-  text-decoration: none;
-}
-
-.social a:hover {
-  text-decoration: underline;
 }
 </style>
