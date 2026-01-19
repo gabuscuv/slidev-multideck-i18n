@@ -17,7 +17,7 @@ A multi-presentation [Slidev](https://sli.dev) template that allows you to maint
 - **WCAG 2.2 AA Theme** - Custom accessible theme with proper contrast ratios and focus states
 - **Flexible Visibility** - Control which presentations appear on the public landing page
 - **Single & Batch Builds** - Build one presentation for development or all at once for deployment
-- **GitHub Pages Ready** - Includes workflow for automatic deployment
+- **Deployment Options** - GitHub Pages (automatic) or FTP (manual) workflows included
 
 ## Quick Start
 
@@ -64,7 +64,8 @@ slidev-multideck/
 │   ├── build.js           # Build orchestrator
 │   └── generate-landing.js
 └── .github/workflows/
-    └── deploy.yml         # GitHub Pages deployment
+    ├── deploy-pages.yml   # GitHub Pages deployment
+    └── deploy-ftp.yml     # FTP deployment
 ```
 
 ## Creating a New Presentation
@@ -246,14 +247,36 @@ Edit `landing/config.json` to customize:
 
 ## Deployment
 
+Two deployment workflows are included. You can use either or both.
+
 ### GitHub Pages
 
 The included workflow automatically builds and deploys on push to `main`.
 
 To enable:
 1. Push to GitHub
-2. Go to Settings > Pages
+2. Go to Settings → Pages
 3. Set Source to "GitHub Actions"
+
+You can also trigger it manually from Actions → "Deploy to GitHub Pages" → Run workflow.
+
+### FTP
+
+Deploy to any FTP server (shared hosting, VPS, etc.).
+
+**Setup:**
+1. Go to Settings → Secrets and variables → Actions
+2. Add these repository secrets:
+   - `FTP_SERVER` - FTP hostname (e.g., `ftp.example.com`)
+   - `FTP_USERNAME` - FTP username
+   - `FTP_PASSWORD` - FTP password
+   - `FTP_PATH` (optional) - Remote directory (e.g., `/public_html/talks/`)
+
+**Deploy:**
+1. Go to Actions → "Deploy to FTP" → Run workflow
+2. Optionally specify:
+   - A single talk name to deploy only that presentation
+   - A custom remote path to override `FTP_PATH`
 
 ### Manual Deployment
 

@@ -1,0 +1,50 @@
+name: Deploy to FTP
+
+on:
+  workflow_dispatch:
+    inputs:
+      talk:
+        description: 'Talk to deploy (leave empty for all)'
+        required: false
+        default: ''
+      remote_path:
+        description: 'Remote FTP path (overrides FTP_PATH secret)'
+        required: false
+        default: ''
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build all presentations
+        if: ${{ github.event.inputs.talk == '' }}
+        run: pnpm run build:all
+
+      - name: Build single presentation
+        if: ${{ github.event.inputs.talk != '' }}
+        run: pnpm run build -- ${{ github.event.inputs.talk }}
+
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ${{ github.event.inputs.remote_path || secrets.FTP_PATH || '/' }}
