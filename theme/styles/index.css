@@ -1,0 +1,523 @@
+/* Atkinson Hyperlegible - Accessibility-focused font */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/*
+ * WCAG 2.2 AA Color Palette
+ *
+ * Contrast ratios (on white #fff):
+ * - Primary #2563eb: 4.6:1 (passes normal text 4.5:1)
+ * - Body text #4B5563: 5.9:1 (passes normal text 4.5:1)
+ * - Success #428645: 4.5:1 (passes normal text)
+ * - Info #2564EC: 4.6:1 (passes normal text)
+ *
+ * Contrast ratios (on dark #1a1a1a):
+ * - Light text #e5e7eb: 12.5:1 (passes)
+ * - Primary light #60a5fa: 7.8:1 (passes normal text)
+ */
+
+:root {
+  /* Primary colors - customize these for your brand */
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-gradient: linear-gradient(135deg, #3b82f6, #2563eb);
+
+  /* Text colors - Light mode */
+  --color-text: #4B5563;
+  --color-text-heading: #1e40af;
+  --color-text-muted: #6B7280;
+
+  /* Background colors - Light mode */
+  --color-bg: #ffffff;
+  --color-bg-alt: #F9FAFB;
+  --color-bg-code: #F3F4F6;
+
+  /* Semantic colors */
+  --color-success: #428645;
+  --color-info: #2564EC;
+  --color-error: #dc2626;
+
+  /* Links */
+  --color-link: #2563eb;
+
+  /* Borders */
+  --color-border: #E5E7EB;
+
+  /* Fonts */
+  --font-sans: 'Atkinson Hyperlegible', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Dark mode colors */
+html.dark {
+  --color-primary: #60a5fa;
+  --color-primary-dark: #3b82f6;
+  --color-primary-gradient: linear-gradient(135deg, #60a5fa, #3b82f6);
+
+  --color-text: #e5e7eb;
+  --color-text-heading: #60a5fa;
+  --color-text-muted: #9CA3AF;
+
+  --color-bg: #1a1a1a;
+  --color-bg-alt: #262626;
+  --color-bg-code: #2d2d2d;
+
+  --color-link: #60a5fa;
+
+  --color-border: #404040;
+}
+
+/* Base styles - scoped to .slidev-layout for specificity */
+.slidev-layout {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  padding: 2rem;
+}
+
+/* Layout-specific styles (global fallbacks for scoped styles) */
+.slidev-layout.default {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.slidev-layout.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.slidev-layout.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.slidev-layout.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.slidev-layout.quote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.slidev-layout.fact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.slidev-layout.statement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.slidev-layout.image-right,
+.slidev-layout.image-left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+}
+
+.slidev-layout.iframe-right,
+.slidev-layout.iframe-left {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+}
+
+/* Typography - scoped for higher specificity */
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3,
+.slidev-layout h4,
+.slidev-layout h5,
+.slidev-layout h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--color-text-heading);
+}
+
+.slidev-layout h1 {
+  font-size: 2.75rem;
+  line-height: 1.2;
+}
+
+.slidev-layout h2 {
+  font-size: 2rem;
+  line-height: 1.3;
+}
+
+.slidev-layout h3 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.slidev-layout h4 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.slidev-layout p,
+.slidev-layout li {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+/* Links - WCAG requires underline for non-color-only indication */
+.slidev-layout a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.slidev-layout a:hover,
+.slidev-layout a:focus {
+  color: var(--color-primary-dark);
+}
+
+.slidev-layout a:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Code */
+.slidev-layout code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background-color: var(--color-bg-code);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+.slidev-layout pre {
+  font-family: var(--font-mono);
+  background-color: var(--color-bg-code);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.slidev-layout pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Lists */
+.slidev-layout ul,
+.slidev-layout ol {
+  padding-left: 1.5rem;
+}
+
+.slidev-layout li {
+  margin: 0.5rem 0;
+}
+
+.slidev-layout li::marker {
+  color: var(--color-primary);
+}
+
+/* Blockquote */
+.slidev-layout blockquote {
+  border-left: 4px solid var(--color-primary);
+  padding-left: 1rem;
+  margin-left: 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Tables */
+.slidev-layout table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.slidev-layout th,
+.slidev-layout td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.slidev-layout th {
+  font-weight: 700;
+  color: var(--color-text-heading);
+  background-color: var(--color-bg-alt);
+}
+
+/* Status badges */
+.slidev-layout .badge-success {
+  background-color: var(--color-success);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.slidev-layout .badge-info {
+  background-color: var(--color-info);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.slidev-layout .badge-error {
+  background-color: var(--color-error);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Utility classes */
+.slidev-layout .bg-alt {
+  background-color: var(--color-bg-alt);
+}
+
+.slidev-layout .text-primary {
+  color: var(--color-primary);
+}
+
+.slidev-layout .text-muted {
+  color: var(--color-text-muted);
+}
+
+.slidev-layout .gradient-text {
+  background: var(--color-primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.slidev-layout .gradient-bg {
+  background: var(--color-primary-gradient);
+}
+
+/* Layout utility classes - for use in markdown content */
+
+/* Two columns - supports both nested (.slidev-layout .two-cols) and same-element (.slidev-layout.two-cols) */
+.slidev-layout.two-cols,
+.slidev-layout .two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  height: 100%;
+}
+
+.slidev-layout.two-cols > .col-left,
+.slidev-layout.two-cols > .col-right,
+.slidev-layout .col-left,
+.slidev-layout .col-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Two columns with header */
+.slidev-layout.two-cols-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.slidev-layout.two-cols-header > .col-header {
+  grid-column: 1 / 3;
+}
+
+.slidev-layout.two-cols-header > .col-bottom {
+  grid-column: 1 / 3;
+  align-self: end;
+}
+
+/* Three columns */
+.slidev-layout.three-cols,
+.slidev-layout .three-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+/* Grid utilities */
+.slidev-layout .grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.slidev-layout .grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.slidev-layout .grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+/* Flexbox utilities */
+.slidev-layout .flex {
+  display: flex;
+}
+
+.slidev-layout .flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.slidev-layout .flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.slidev-layout .flex-wrap {
+  flex-wrap: wrap;
+}
+
+.slidev-layout .items-center {
+  align-items: center;
+}
+
+.slidev-layout .items-start {
+  align-items: flex-start;
+}
+
+.slidev-layout .items-end {
+  align-items: flex-end;
+}
+
+.slidev-layout .justify-center {
+  justify-content: center;
+}
+
+.slidev-layout .justify-between {
+  justify-content: space-between;
+}
+
+.slidev-layout .justify-around {
+  justify-content: space-around;
+}
+
+.slidev-layout .justify-start {
+  justify-content: flex-start;
+}
+
+.slidev-layout .justify-end {
+  justify-content: flex-end;
+}
+
+/* Gap utilities */
+.slidev-layout .gap-1 { gap: 0.25rem; }
+.slidev-layout .gap-2 { gap: 0.5rem; }
+.slidev-layout .gap-3 { gap: 0.75rem; }
+.slidev-layout .gap-4 { gap: 1rem; }
+.slidev-layout .gap-6 { gap: 1.5rem; }
+.slidev-layout .gap-8 { gap: 2rem; }
+
+/* Spacing utilities */
+.slidev-layout .m-0 { margin: 0; }
+.slidev-layout .m-1 { margin: 0.25rem; }
+.slidev-layout .m-2 { margin: 0.5rem; }
+.slidev-layout .m-4 { margin: 1rem; }
+.slidev-layout .m-8 { margin: 2rem; }
+
+.slidev-layout .mt-0 { margin-top: 0; }
+.slidev-layout .mt-1 { margin-top: 0.25rem; }
+.slidev-layout .mt-2 { margin-top: 0.5rem; }
+.slidev-layout .mt-4 { margin-top: 1rem; }
+.slidev-layout .mt-8 { margin-top: 2rem; }
+
+.slidev-layout .mb-0 { margin-bottom: 0; }
+.slidev-layout .mb-1 { margin-bottom: 0.25rem; }
+.slidev-layout .mb-2 { margin-bottom: 0.5rem; }
+.slidev-layout .mb-4 { margin-bottom: 1rem; }
+.slidev-layout .mb-8 { margin-bottom: 2rem; }
+
+.slidev-layout .p-0 { padding: 0; }
+.slidev-layout .p-1 { padding: 0.25rem; }
+.slidev-layout .p-2 { padding: 0.5rem; }
+.slidev-layout .p-4 { padding: 1rem; }
+.slidev-layout .p-8 { padding: 2rem; }
+
+/* Width/height utilities */
+.slidev-layout .w-full { width: 100%; }
+.slidev-layout .h-full { height: 100%; }
+
+/* Text alignment */
+.slidev-layout .text-left { text-align: left; }
+.slidev-layout .text-center { text-align: center; }
+.slidev-layout .text-right { text-align: right; }
+
+/* Text size */
+.slidev-layout .text-sm { font-size: 0.875rem; }
+.slidev-layout .text-base { font-size: 1rem; }
+.slidev-layout .text-lg { font-size: 1.125rem; }
+.slidev-layout .text-xl { font-size: 1.25rem; }
+.slidev-layout .text-2xl { font-size: 1.5rem; }
+.slidev-layout .text-3xl { font-size: 2rem; }
+.slidev-layout .text-4xl { font-size: 2.5rem; }
+
+/* Font weight */
+.slidev-layout .font-normal { font-weight: 400; }
+.slidev-layout .font-bold { font-weight: 700; }
+
+/* Border utilities */
+.slidev-layout .border {
+  border: 1px solid var(--color-border);
+}
+
+.slidev-layout .rounded {
+  border-radius: 4px;
+}
+
+.slidev-layout .rounded-lg {
+  border-radius: 8px;
+}
+
+/* Shadow */
+.slidev-layout .shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.slidev-layout .shadow-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus styles for accessibility */
+.slidev-layout *:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

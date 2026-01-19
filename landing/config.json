@@ -1,0 +1,9 @@
+{
+  "title": "My Presentations",
+  "description": "A collection of talks and slide decks.",
+  "author": "Your Name",
+  "links": [
+    { "label": "GitHub", "url": "https://github.com/yourusername" },
+    { "label": "Twitter", "url": "https://twitter.com/yourusername" }
+  ]
+}

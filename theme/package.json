@@ -1,0 +1,18 @@
+{
+  "name": "slidev-theme-starter",
+  "version": "1.0.0",
+  "description": "WCAG 2.2 AA conformant Slidev theme - starter template",
+  "slidev": {
+    "colorSchema": "both",
+    "defaults": {
+      "fonts": {
+        "sans": "Atkinson Hyperlegible",
+        "mono": "JetBrains Mono"
+      },
+      "hightlighter": "shiki"
+    }
+  },
+  "engines": {
+    "slidev": ">=0.48.0"
+  }
+}
