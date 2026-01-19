@@ -57,7 +57,7 @@ defineProps<{
 }
 
 .role {
-  color: #888;
+  color: var(--color-text-muted);
   margin-bottom: 0.5rem;
 }
 
@@ -67,7 +67,7 @@ defineProps<{
 }
 
 .social a {
-  color: #3b82f6;
+  color: var(--color-link);
   text-decoration: none;
 }
 

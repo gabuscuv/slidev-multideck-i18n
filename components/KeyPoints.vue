@@ -31,7 +31,7 @@ withDefaults(defineProps<{
 
 .key-points h3 {
   margin-bottom: 1rem;
-  color: #3b82f6;
+  color: var(--color-text-heading);
 }
 
 .key-points ul {
@@ -49,6 +49,6 @@ withDefaults(defineProps<{
   content: '→';
   position: absolute;
   left: 0;
-  color: #3b82f6;
+  color: var(--color-primary);
 }
 </style>
