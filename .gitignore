@@ -1,0 +1,30 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Slidev
+.slidev
+.slidev-temp
+
+# Local/temp files
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Cache
+.vite
+*.tsbuildinfo
+
+# Export outputs
+*.pdf
+*.pptx
