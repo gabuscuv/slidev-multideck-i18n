@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { spawn } from 'child_process';
-import { existsSync, mkdirSync, rmSync, symlinkSync, readdirSync, readFileSync, cpSync } from 'fs';
-import { resolve, dirname, join } from 'path';
+import { existsSync, writeFileSync, mkdirSync, rmSync, symlinkSync, readdirSync, readFileSync, cpSync } from 'fs';
+import { resolve, dirname, relative, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -12,6 +12,7 @@ const DIRS = {
   presentations: resolve(ROOT, 'presentations'),
   slides: resolve(ROOT, 'slides'),
   components: resolve(ROOT, 'components'),
+  shared: resolve(ROOT, 'shared'),
   layouts: resolve(ROOT, 'layouts'),
   public: resolve(ROOT, 'public'),
   styles: resolve(ROOT, 'styles'),
@@ -20,8 +21,22 @@ const DIRS = {
   temp: resolve(ROOT, '.slidev-temp'),
 };
 
+// slide files and directories to symlink into presentation workspace
+const FILES = ['slides.md', 'locales', 'img'];
+
 // Shared directories to symlink into presentation workspace
-const SHARED_DIRS = ['components', 'layouts', 'public', 'styles', 'slides', 'theme'];
+const SHARED_DIRS = ['components', 'layouts', 'public', 'styles', 'slides', 'theme', 'shared', 'componsables'];
+
+const extensions = [
+  {
+    base: join('vite.config.base.ts'),
+    target: join('vite.config.ts'),
+  },
+  {
+    base: join('setup', 'main.base.ts'),
+    target: join('setup', 'main.ts'),
+  }
+];
 
 function listPresentations() {
   if (!existsSync(DIRS.presentations)) return [];
@@ -41,6 +56,21 @@ function setupWorkspace(presentationName) {
   }
   mkdirSync(workspaceDir, { recursive: true });
 
+  for (const { base, target } of extensions) {
+  const targetDir = join(workspaceDir, target).replace(/\/[^/]+$/, '');
+
+  // ensure folder exists
+  mkdirSync(targetDir, { recursive: true });
+
+    const importPath = relative(targetDir, join(ROOT, base));
+
+    writeFileSync(
+      join(workspaceDir, target),
+      `import base from '${importPath}'\n\nexport default base\n`,
+      'utf8'
+    );
+  }
+
   // Symlink shared directories
   for (const dir of SHARED_DIRS) {
     const source = DIRS[dir] || resolve(ROOT, dir);
@@ -50,10 +80,15 @@ function setupWorkspace(presentationName) {
     }
   }
 
-  // Symlink slides.md
-  const slidesSource = join(presentationDir, 'slides.md');
-  const slidesTarget = join(workspaceDir, 'slides.md');
-  symlinkSync(slidesSource, slidesTarget);
+  // Symlink slide files
+  for (const file of FILES) {
+    const source = resolve(presentationDir, file);
+    const target = join(workspaceDir, file);
+    if (existsSync(source)) {
+      symlinkSync(source, target);
+    }
+  }
+  
 
   // Symlink presentation-specific components if they exist
   const localComponents = join(presentationDir, 'components');

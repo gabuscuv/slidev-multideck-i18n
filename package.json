@@ -11,12 +11,17 @@
     "export": "node scripts/build.js export"
   },
   "dependencies": {
-    "@slidev/cli": "^52.11.3",
+    "@slidev/cli": "latest",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
-    "vue": "^3.5.26"
+    "@rollup/plugin-yaml": "^4.0.0",
+    "vue": "^3.5.26",
+    "vue-i18n": "^11.4.6",
+    "vite": "^8.1.4"
   },
   "devDependencies": {
+    "@slidev/types": "latest",
+    "@types/node": "^20.4.2",
     "gray-matter": "^4.0.3",
     "glob": "^11.0.0"
   }
