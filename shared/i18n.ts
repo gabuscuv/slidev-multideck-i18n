@@ -40,7 +40,7 @@ function loadLocaleMessages() {
 export function createSlidevI18n() {
   return createI18n({
     locale: 'es',
-    fallbackLocale: 'es',
+    fallbackLocale: 'en',
     messages: loadLocaleMessages(),
   })
 }

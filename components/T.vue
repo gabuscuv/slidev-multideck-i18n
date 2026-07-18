@@ -5,9 +5,12 @@ const props = defineProps<{
   k?: string
 }>()
 
-const text = useTranslation(() => props.k)
+const texts = useTranslation(() => props.k)
+
 </script>
 
 <template>
-  {{ text }}
+  <div v-for="(text, index) in texts">
+    {{ text }}
+  </div>
 </template>
